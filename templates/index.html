@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breast Cancer Detection System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <!-- Link to external CSS file -->
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms,typography,aspect-ratio,container-queries"></script>
+  <!-- ECharts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+  <!-- Shared Navigation -->
+  <nav class="bg-gradient-to-r from-blue-500 to-teal-500 shadow-lg">
+    <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center">
+        <div class="flex items-center">
+          <a href="#home" class="flex-shrink-0">
+            <!-- Replace this placeholder with your logo -->
+            <img
+              src="https://www.shutterstock.com/image-vector/international-breast-cancer-awareness-month-600w-2355301229.jpg"
+              alt="Medical Logo" class="h-12 w-auto transition duration-300 transform hover:rotate-6 hover:scale-110" />
+          </a>
+          <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+            <a href="#home"
+              class="text-white inline-flex items-center px-1 pt-1 text-sm font-medium hover:text-gray-200 transition duration-300">Home</a>
+            <a href="#patient-records"
+              class="text-white inline-flex items-center px-1 pt-1 text-sm font-medium hover:text-gray-200 transition duration-300">Patient
+              Records</a>
+            <a href="#analysis"
+              class="text-white inline-flex items-center px-1 pt-1 text-sm font-medium hover:text-gray-200 transition duration-300">Analysis</a>
+            <a href="#help"
+              class="text-white inline-flex items-center px-1 pt-1 text-sm font-medium hover:text-gray-200 transition duration-300">Help</a>
+          </div>
+        </div>
+        <!-- Mobile Menu Button -->
+        <div class="flex items-center sm:hidden">
+          <button id="mobile-menu-button" type="button"
+            class="p-2 rounded-md text-white hover:text-gray-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+            <span class="sr-only">Open main menu</span>
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+        <div class="flex items-center">
+          <button type="button" onclick="window.location.href='http://127.0.0.1:5000/chatbot';"
+            class="flex items-center bg-white text-blue-600 py-2 px-4 rounded-lg shadow-lg transition duration-300 hover:bg-gray-100 transform hover:scale-105">
+            <i class="fas fa-comments mr-2"></i>ChatBot
+          </button>
+
+
+        </div>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="sm:hidden hidden">
+      <div class="pt-2 pb-3 space-y-1">
+        <a href="#home"
+          class="block pl-3 pr-4 py-2 border-l-4 border-white text-white bg-blue-600 text-base font-medium transition duration-200">Home</a>
+        <a href="#patient-records"
+          class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-white hover:border-white hover:bg-blue-600 text-base font-medium transition duration-200">Patient
+          Records</a>
+        <a href="#analysis"
+          class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-white hover:border-white hover:bg-blue-600 text-base font-medium transition duration-200">Analysis</a>
+        <a href="#help"
+          class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-white hover:border-white hover:bg-blue-600 text-base font-medium transition duration-200">Help</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Home Section -->
+    <section id="home" class="fade-in">
+      <div class="bg-gradient-to-r from-teal-400 to-blue-500 py-20 text-center">
+        <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6">
+          Welcome to the Breast Cancer Detection System
+        </h1>
+        <p class="text-lg text-white mb-8">
+          Accurate and efficient analysis for early detection, powered by advanced machine learning.
+        </p>
+        <div class="flex justify-center space-x-4">
+          <a href="#analysis"
+            class="bg-white text-blue-600 py-3 px-6 rounded-lg shadow-lg transition duration-300 hover:bg-gray-100 transform hover:scale-105">Get
+            Started</a>
+          <a href="#help"
+            class="bg-transparent border border-white text-white py-3 px-6 rounded-lg transition duration-300 hover:bg-white hover:text-blue-600 transform hover:scale-105">Learn
+            More</a>
+        </div>
+      </div>
+      <!-- Features Section -->
+      <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div
+              class="bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105">
+              <div class="text-blue-600 mb-4">
+                <i class="fas fa-stethoscope text-4xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2">Accurate Analysis</h3>
+              <p class="text-gray-700">
+                State‑of‑the‑art machine learning algorithms for precise diagnosis.
+              </p>
+            </div>
+            <div
+              class="bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105">
+              <div class="text-teal-600 mb-4">
+                <i class="fas fa-heartbeat text-4xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2">Reliable Results</h3>
+              <p class="text-gray-700">
+                Timely and reliable analysis to ensure effective patient care.
+              </p>
+            </div>
+            <div
+              class="bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105">
+              <div class="text-blue-600 mb-4">
+                <i class="fas fa-user-md text-4xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2">Expert Support</h3>
+              <p class="text-gray-700">
+                Collaborate with leading experts for professional insights and assistance.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- Patient Records Section (Editable CRUD) -->
+    <section id="patient-records" class="hidden-section fade-in">
+      <h1 class="text-3xl font-bold text-gray-900 mb-8">Patient Records</h1>
+      <div class="overflow-x-auto mb-8">
+        <table class="min-w-full bg-white shadow rounded-lg overflow-hidden">
+          <thead class="bg-gradient-to-r from-blue-500 to-teal-500">
+            <tr>
+              <th class="px-6 py-3 text-left text-white text-lg font-bold">
+                Patient ID
+              </th>
+              <th class="px-6 py-3 text-left text-white text-lg font-bold">
+                Name
+              </th>
+              <th class="px-6 py-3 text-left text-white text-lg font-bold">
+                Age
+              </th>
+              <th class="px-6 py-3 text-left text-white text-lg font-bold">
+                Last Test
+              </th>
+              <th class="px-6 py-3 text-left text-white text-lg font-bold">
+                Status
+              </th>
+              <th class="px-6 py-3 text-left text-white text-lg font-bold">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody id="patientsTableBody" class="divide-y divide-gray-200">
+            <!-- Rows will be injected here via JavaScript -->
+          </tbody>
+        </table>
+      </div>
+      <!-- Add New Patient Form -->
+      <div class="mt-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-4">Add New Patient</h2>
+        <form id="addPatientForm" class="grid grid-cols-1 md:grid-cols-5 gap-4">
+          <input type="text" id="newId" placeholder="Patient ID" class="px-3 py-2 border rounded" required />
+          <input type="text" id="newName" placeholder="Name" class="px-3 py-2 border rounded" required />
+          <input type="number" id="newAge" placeholder="Age" class="px-3 py-2 border rounded" required />
+          <input type="date" id="newLastTest" placeholder="Last Test" class="px-3 py-2 border rounded" required />
+          <select id="newStatus" class="px-3 py-2 border rounded" required>
+            <option value="">Status</option>
+            <option value="Benign">Benign</option>
+            <option value="Malignant">Malignant</option>
+          </select>
+          <button type="submit"
+            class="md:col-span-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
+            Add Patient
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Analysis Section -->
+    <section id="analysis" class="hidden-section fade-in">
+      <!-- Analysis Parameters -->
+      <div class="bg-white shadow-2xl rounded-lg p-6 mb-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">
+          Analysis Parameters
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">
+              Clump Thickness
+            </label>
+            <input type="number" min="1" max="10"
+              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600 sm:text-sm transition duration-200"
+              placeholder="1-10" />
+          </div>
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">
+              Uniform Cell Size
+            </label>
+            <input type="number" min="1" max="10"
+              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600 sm:text-sm transition duration-200"
+              placeholder="1-10" />
+          </div>
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">
+              Uniform Cell Shape
+            </label>
+            <input type="number" min="1" max="10"
+              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600 sm:text-sm transition duration-200"
+              placeholder="1-10" />
+          </div>
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">
+              Marginal Adhesion
+            </label>
+            <input type="number" min="1" max="10"
+              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600 sm:text-sm transition duration-200"
+              placeholder="1-10" />
+          </div>
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">
+              Epithelial Cell Size
+            </label>
+            <input type="number" min="1" max="10"
+              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600 sm:text-sm transition duration-200"
+              placeholder="1-10" />
+          </div>
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">
+              Bare Nuclei
+            </label>
+            <input type="number" min="1" max="10"
+              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600 sm:text-sm transition duration-200"
+              placeholder="1-10" />
+          </div>
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">
+              Bland Chromatin
+            </label>
+            <input type="number" min="1" max="10"
+              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600 sm:text-sm transition duration-200"
+              placeholder="1-10" />
+          </div>
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">
+              Normal Nucleoli
+            </label>
+            <input type="number" min="1" max="10"
+              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600 sm:text-sm transition duration-200"
+              placeholder="1-10" />
+          </div>
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">
+              Mitoses
+            </label>
+            <input type="number" min="1" max="10"
+              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600 sm:text-sm transition duration-200"
+              placeholder="1-10" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Multi-Step Form for Tumor Detailed Parameters -->
+      <div class="bg-white shadow-2xl rounded-lg p-6 mb-8">
+        <form id="tumorForm">
+          <!-- Step 1: Tumor Characteristics -->
+          <div class="step" id="step1">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Tumor Characteristics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Mean Radius (mm)</label>
+                <input type="number" step="0.01" name="meanRadius" value="12.80"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Mean Texture</label>
+                <input type="number" step="0.01" name="meanTexture" value="18.40"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Mean Perimeter (mm)</label>
+                <input type="number" step="0.01" name="meanPerimeter" value="85.60"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Mean Area (mm²)</label>
+                <input type="number" step="0.01" name="meanArea" value="550.30"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Mean Smoothness</label>
+                <input type="number" step="0.001" name="meanSmoothness" value="0.085"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Mean Compactness</label>
+                <input type="number" step="0.001" name="meanCompactness" value="0.130"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Mean Concavity</label>
+                <input type="number" step="0.001" name="meanConcavity" value="0.095"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Mean Concave Points</label>
+                <input type="number" step="0.001" name="meanConcavePoints" value="0.050"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Mean Symmetry</label>
+                <input type="number" step="0.001" name="meanSymmetry" value="0.160"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Mean Fractal Dimension</label>
+                <input type="number" step="0.001" name="meanFractalDimension" value="0.058"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+            </div>
+            <div class="mt-4 flex justify-end">
+              <button type="button" id="nextToStep2"
+                class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">Next</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Standard Error (SE) Measurements -->
+          <div class="step hidden-section" id="step2">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Standard Error (SE) Measurements</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Radius SE (mm)</label>
+                <input type="number" step="0.01" name="radiusSE" value="0.35"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Texture SE</label>
+                <input type="number" step="0.01" name="textureSE" value="1.10"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Perimeter SE (mm)</label>
+                <input type="number" step="0.01" name="perimeterSE" value="2.20"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Area SE (mm²)</label>
+                <input type="number" step="0.01" name="areaSE" value="28.40"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Smoothness SE</label>
+                <input type="number" step="0.001" name="smoothnessSE" value="0.007"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Compactness SE</label>
+                <input type="number" step="0.001" name="compactnessSE" value="0.020"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Concavity SE</label>
+                <input type="number" step="0.001" name="concavitySE" value="0.012"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Concave Points SE</label>
+                <input type="number" step="0.001" name="concavePointsSE" value="0.008"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Symmetry SE</label>
+                <input type="number" step="0.001" name="symmetrySE" value="0.018"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Fractal Dimension SE</label>
+                <input type="number" step="0.001" name="fractalDimensionSE" value="0.004"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+            </div>
+            <div class="mt-4 flex justify-between">
+              <button type="button" id="prevToStep1"
+                class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 transition duration-300">Previous</button>
+              <button type="button" id="nextToStep3"
+                class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">Next</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Worst Measurements -->
+          <div class="step hidden-section" id="step3">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Worst Measurements</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Worst Radius (mm)</label>
+                <input type="number" step="0.01" name="worstRadius" value="16.90"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Worst Texture</label>
+                <input type="number" step="0.01" name="worstTexture" value="22.80"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Worst Perimeter (mm)</label>
+                <input type="number" step="0.01" name="worstPerimeter" value="110.50"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Worst Area (mm²)</label>
+                <input type="number" step="0.01" name="worstArea" value="850.20"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Worst Smoothness</label>
+                <input type="number" step="0.001" name="worstSmoothness" value="0.130"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Worst Compactness</label>
+                <input type="number" step="0.001" name="worstCompactness" value="0.270"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Worst Concavity</label>
+                <input type="number" step="0.001" name="worstConcavity" value="0.210"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Worst Concave Points</label>
+                <input type="number" step="0.001" name="worstConcavePoints" value="0.100"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Worst Symmetry</label>
+                <input type="number" step="0.001" name="worstSymmetry" value="0.240"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Worst Fractal Dimension</label>
+                <input type="number" step="0.001" name="worstFractalDimension" value="0.075"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600" />
+              </div>
+            </div>
+            <div class="mt-4 flex justify-between">
+              <button type="button" id="prevToStep2"
+                class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 transition duration-300">Previous</button>
+              <button type="submit"
+                class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- Tumor Form Submission Section -->
+<form id="tumorForm">
+  <!-- your form fields for numerical data here -->
+  <!-- <button type="submit" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300">Submit</button> -->
+</form>
+
+<!-- Element to display the numerical prediction -->
+<div id="numerical-prediction" class="mt-4 text-lg font-semibold text-gray-900 text-center"></div>
+
+
+      <!-- Image Upload -->
+      <!-- Image Upload -->
+<div class="bg-white shadow-2xl rounded-lg p-6 mb-8">
+  <h2 class="text-2xl font-bold text-gray-900 mb-6">Image Upload</h2>
+  <div class="mt-2 flex justify-center rounded-lg border-2 border-dashed border-gray-300 px-6 py-10 bg-[url('https://ai-public.creatie.ai/medical_bg/upload_bg.png')] bg-center bg-no-repeat bg-contain">
+    <div class="text-center">
+      <i class="fas fa-microscope text-blue-600 text-5xl mb-4 animate-bounce"></i>
+      <div class="mt-4 flex items-center justify-center text-sm leading-6 text-gray-600">
+        <label class="relative cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+          Upload a file
+          <input type="file" id="image-upload" name="file" class="sr-only" required />
+        </label>
+        <p class="ml-3">or drag and drop</p>
+      </div>
+      <p class="mt-2 text-xs leading-5 text-gray-600">PNG, JPG, DICOM up to 10MB</p>
+    </div>
+  </div>
+  <!-- Element to display the file name -->
+  <div id="filename-result" class="mt-4 text-center text-lg font-semibold text-gray-700"></div>
+  <!-- Element to display the image preview -->
+  <div class="mt-4 text-center">
+    <img id="uploaded-image" src="" alt="Uploaded Image" style="max-width: 300px; display: none;" />
+  </div>
+  <!-- Element to display the diagnosis -->
+  <div id="diagnosis-result" class="mt-4 text-lg font-semibold text-gray-900 text-center"></div>
+</div>
+
+<script>
+  document.getElementById('image-upload').addEventListener('change', function() {
+    const file = this.files[0];
+    if (!file) return;
+    
+    // Display the file name
+    document.getElementById('filename-result').innerText = 'File: ' + file.name;
+    
+    // Show the image preview using FileReader
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const imgElement = document.getElementById('uploaded-image');
+      imgElement.src = e.target.result;
+      imgElement.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+
+    // Create a FormData object to send the file to the server
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    fetch('/predict_image', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Prediction:', data);
+      // Display the diagnosis in the designated element
+      document.getElementById('diagnosis-result').innerText = 'Diagnosis: ' + data.diagnosis;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      document.getElementById('diagnosis-result').innerText = 'Error uploading file';
+    });
+  });
+</script>
+
+
+
+
+
+
+
+      <!-- Analysis Results -->
+      <div class="bg-white shadow-2xl rounded-lg p-6 relative">
+        <div class="absolute right-4 top-4">
+          <img src="https://ai-public.creatie.ai/medical_icons/analysis_icon.png" class="h-12 w-12 opacity-70"
+            alt="Analysis Icon" />
+        </div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">
+          Analysis Results
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <div class="h-64" id="resultChart"></div>
+          </div>
+          <div class="space-y-4">
+            <div class="bg-green-50 p-4 rounded-lg transition duration-300 hover:bg-green-100">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <i class="fas fa-check-circle text-green-500 text-3xl"></i>
+                </div>
+                <div class="ml-3">
+                  <h3 class="text-lg font-bold text-green-800">
+                    Analysis Complete
+                  </h3>
+                  <p class="mt-1 text-lg text-green-700">
+                    Probability of Benign: 92%
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <button type="button"
+                class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg transition duration-300 transform hover:scale-110">
+                Save Results
+              </button>
+              <button type="button"
+                class="w-full sm:w-auto bg-gradient-to-r from-green-400 to-blue-400 hover:from-green-500 hover:to-blue-500 text-white py-3 px-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-110">
+                Export Report
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Help Section -->
+    <section id="help" class="hidden-section fade-in">
+      <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">
+        Help & FAQ
+      </h1>
+      <div class="space-y-6">
+        <div class="bg-white p-6 rounded-lg shadow-xl transition duration-300 hover:shadow-2xl">
+          <h3 class="text-xl font-bold text-blue-600 mb-2">
+            How does the system work?
+          </h3>
+          <p class="text-gray-700">
+            Our system uses advanced machine learning algorithms to analyze
+            various parameters from imaging and biopsy data to detect early
+            signs of breast cancer.
+          </p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-xl transition duration-300 hover:shadow-2xl">
+          <h3 class="text-xl font-bold text-blue-600 mb-2">
+            How accurate is the analysis?
+          </h3>
+          <p class="text-gray-700">
+            The analysis provides high accuracy, with a success rate of over
+            90% in distinguishing between benign and malignant tumors.
+          </p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-xl transition duration-300 hover:shadow-2xl">
+          <h3 class="text-xl font-bold text-blue-600 mb-2">
+            Is my data secure?
+          </h3>
+          <p class="text-gray-700">
+            Yes, we follow strict data protection guidelines to ensure all
+            patient data remains confidential and secure.
+          </p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-xl transition duration-300 hover:shadow-2xl">
+          <h3 class="text-xl font-bold text-blue-600 mb-2">
+            Who can I contact for support?
+          </h3>
+          <p class="text-gray-700">
+            For any inquiries or support, please reach out to our expert team.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Link to external JavaScript file -->
+  <script src="script.js"></script>
+</body>
+
+</html>
