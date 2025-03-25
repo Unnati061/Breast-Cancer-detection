@@ -75,55 +75,39 @@ def predict_image():
     })
 
 
-# Existing endpoint for tabular features
-@app.route('/predict', methods=['POST'])
-def predict():
-    try:
-        data = request.get_json()
-        features = np.array(data['features']).reshape(1, -1)
-        prediction_proba = model.predict_proba(features)[0]
-        benign_prob = round(prediction_proba[0] * 100, 2)
-        malignant_prob = round(prediction_proba[1] * 100, 2)
-        diagnosis = "Benign" if benign_prob > malignant_prob else "Malignant"
-        return jsonify({
-            'diagnosis': diagnosis,
-            'benign_prob': benign_prob,
-            'malignant_prob': malignant_prob
-        })
-    except Exception as e:
-        return jsonify({'error': str(e)})
+
 
 # # New endpoint for image-based prediction
-# @app.route('/predict_image', methods=['POST'])
-# def predict_image():
-#     if 'file' not in request.files:
-#         return jsonify({'error': 'No file uploaded'}), 400
-#     file = request.files['file']
-#     if file.filename == '':
-#         return jsonify({'error': 'No selected file'}), 400
+@app.route('/predict_image', methods=['POST'])
+def predict_image():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file uploaded'}), 400
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
 
-#     try:
-#         # Open and preprocess the image
-#         img = Image.open(file).convert("RGB")
-#         img = img.resize((224, 224))  # Match the training target_size
-#         img_array = image.img_to_array(img)
-#         img_array = np.expand_dims(img_array, axis=0)
-#         # Apply the same rescaling as in training
-#         img_array /= 255.0
+    try:
+        # Open and preprocess the image
+        img = Image.open(file).convert("RGB")
+        img = img.resize((224, 224))  # Match the training target_size
+        img_array = image.img_to_array(img)
+        img_array = np.expand_dims(img_array, axis=0)
+        # Apply the same rescaling as in training
+        img_array /= 255.0
 
-#         # Get prediction from the model
-#         prediction = image_model.predict(img_array)
-#         print("Raw prediction:", prediction)  # For debugging
+        # Get prediction from the model
+        prediction = image_model.predict(img_array)
+        print("Raw prediction:", prediction)  # For debugging
         
-#         # With sigmoid output, prediction[0][0] is the probability for malignant
-#         diagnosis = "Malignant" if prediction[0][0] > 0.5 else "Benign"
+        # With sigmoid output, prediction[0][0] is the probability for malignant
+        diagnosis = "Malignant" if prediction[0][0] > 0.5 else "Benign"
 
-#         return jsonify({
-#             'diagnosis': diagnosis,
-#             'prediction': prediction.tolist()
-#         })
-#     except Exception as e:
-#         return jsonify({'error': str(e)}), 500
+        return jsonify({
+            'diagnosis': diagnosis,
+            'prediction': prediction.tolist()
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 @app.route('/<path:filename>')
